@@ -56,8 +56,13 @@ if (!empty(trim($tg)))
     $box->draw($text);
 }
 
-header("Content-type: image/png");
-imagepng($new_image);
+if (isset($_GET['jpg'])) {
+	header("Content-type: image/jpeg");
+	imagejpeg($new_image);
+} else {
+	header("Content-type: image/png");
+	imagepng($new_image);
+}
 imagedestroy($new_image);
 
 function auto_font_size($text, $text_maxwidth, $fontfile, $fontsize = 1)
@@ -79,9 +84,9 @@ function setTransparency($new_image, $image_source)
 
     $transparencyIndex = imagecolortransparent($image_source);
     $transparencyColor = array(
-        'red' => rand(1, 255) ,
-        'green' => rand(1, 255) ,
-        'blue' => rand(1, 255)
+        'red' => rand(0, 255) ,
+        'green' => rand(0, 255) ,
+        'blue' => rand(0, 255)
     );
 
     if ($transparencyIndex >= 0)
